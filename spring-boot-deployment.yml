@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: spring-boot
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: spring-boot
+    template:
+        metadata:
+            labels:
+                app: spring-boot
+        spec:
+            containers:
+                - name: spring-boot
+                  image: ghcr.io/kimbackdoo/spring-boot:latest
+                  ports:
+                      - containerPort: 8080
+                  env:
+                      - name: MYSQL_HOST
+                        value: mysql
+                  resources:
+                      limits:
+                          memory: '128Mi'
+                          cpu: '500m'
